@@ -1,22 +1,20 @@
 /*<template>
   <div class="vh-100 d-flex justify-content-center align-items-center ">
     
-    <Home />
+    <LoginSignUp />
   </div>
 </template>
 
 <script>
 
-
 // @ is an alias to /src
-import Home from '@/components/Home.vue'
-
+import LoginSignUp from '@/components/LoginSignUp.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'LoginSignUpView',
   components: {
-    Home
-}
+    LoginSignUp
+  }
 }
 </script>
 
