@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import LoginSignUpView from '../views/LoginSignUpView.vue'
 
 const routes = [{
         path: '/',
@@ -10,7 +9,11 @@ const routes = [{
     {
         path: '/LoginSignUp',
         name: 'LoginSignUp',
-        component: LoginSignUpView
+        component: () =>
+            import ( /* webpackChunkName: "LoginSignUp" */ '@/views/LoginSignUpView.vue')
+
+
+
     },
     {
         path: '/about',
@@ -25,7 +28,8 @@ const routes = [{
 
 const router = createRouter({
     history: createWebHashHistory(),
-    routes
+    routes,
+    linkActiveClass: 'NavBar-Active-Link'
 })
 
 export default router

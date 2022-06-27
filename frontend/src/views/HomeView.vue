@@ -1,7 +1,8 @@
 /*<template>
-  <div class="vh-100 d-flex justify-content-center align-items-center ">
+  <div >
     
-    <Home />
+    <Post />
+    
   </div>
 </template>
 
@@ -9,13 +10,13 @@
 
 
 // @ is an alias to /src
-import Home from '@/components/Home.vue'
+import Post from '@/components/Post.vue'
 
 
 export default {
   name: 'HomeView',
   components: {
-    Home
+    Post
 }
 }
 </script>
