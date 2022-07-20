@@ -11,6 +11,12 @@ const routes = [{
         name: 'LoginSignUp',
         component: () =>
             import ( /* webpackChunkName: "LoginSignUp" */ '@/views/LoginSignUpView.vue')
+    },
+    {
+        path: '/Account',
+        name: 'Account',
+        component: () =>
+            import ( /* webpackChunkName: "AccountView" */ '@/views/AccountView.vue')
 
 
 
@@ -31,5 +37,8 @@ const router = createRouter({
     routes,
     linkActiveClass: 'NavBar-Active-Link'
 })
+
+/* add it here */
+
 
 export default router
