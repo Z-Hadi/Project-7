@@ -5,7 +5,7 @@
         <div class=" d-flex  justify-content-start">
           <span class="card-text  text-muted me-1 "><small>Posted By: </small></span>
           <p class="card-text  text-muted me-2   "><small>{{ author }}</small></p>
-          <p class="card-text "><small id="time" class="text-muted">{{ time }}</small></p>
+          <p class="card-text "><small id="time" class="text-muted">{{ formatedTime }}</small></p>
         </div>
       </header>
       <div class="card-body">
@@ -32,11 +32,17 @@
 export default {
   props: {
     author: String,
-    time: String,
+    timestamp: Number,
     title: String,
     body: String,
     seen: String
-  }
-}
+  },
 
+ computed: {
+    formatedTime() {
+      const date = new Date(this.timestamp);
+      return date.toLocaleDateString();
+    },
+  },
+}
 </script>

@@ -1,57 +1,24 @@
+
 <template>
-  <template v-if="logInRequest">
-    <div class="row ">
-      <div class="col-6 offset-3 col-sm-8 offset-sm-2 ">
 
-        <main class="form-signin w-100 m-auto  text-center">
-          <form>
-            <img class="mb-5  w-100   " src="icon-left-font-monochrome-black.svg" alt="">
+<tempalte v-if="signUpRequest">
 
-            <h4 class="h4 mb-4 fw-normal">Please sign in</h4>
-            <div >
-            <div class="form-floating">
-              <input type="email" class="form-control"  id="floatingInput" placeholder="name@example.com">
-              <label for="floatingInput">Email address</label>
-            </div>
-            <div class="form-floating">
-              <input type="password" class="form-control"  id="floatingPassword" placeholder="Password">
-              <label st for="floatingPassword">Password</label>
-            </div>
-            </div>
-            <div class="checkbox mb-3">
-
-            </div>
-            <button class="w-75 btn btn-lg btn-primary mb-3" type="submit" @click="logInRequest = true , signUpRequest = false">Sign in</button>
-
-            <button class="w-75 btn btn-lg btn-success "  @click="signUpRequest = true , logInRequest = false">Create New Account</button>
-          </form>
-
-        </main>
-
-      </div>
-    </div>
-  </template>
-
-
-
-  <tempalte v-if="signUpRequest">
-
-    <form @submit.prevent="submit" class="col-6 offset-3 col-sm-6 offset-sm-3 ">
+    <form class="col-6 offset-3 col-sm-6 offset-sm-3 ">
       <div class="container bg-white">
         <h1>Sign Up</h1>
         <p class="mb-5">Please fill in this form to create an account.</p>
 
         <label for="email"><b>First Name</b></label>
-        <input type="text" placeholder="Enter First Name" v-model="firstname"  required>
+        <input type="text" placeholder="Enter First Name" name="firstname" required>
 
         <label for="email"><b>Last Name</b></label>
-        <input type="text" placeholder="Enter Last Name" v-model="lastname"  required>
+        <input type="text" placeholder="Enter Last Name" name="lastname" required>
 
         <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" v-model="email" required>
+        <input type="text" placeholder="Enter Email" name="email" required>
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" v-model="password" required>
+        <input type="password" placeholder="Enter Password" name="password" required>
 
 
         <label for="psw-repeat"><b>Please Choose a profile picture</b></label>
@@ -76,35 +43,26 @@
 
 <script>
 export default {
-  
+  props: {
+      firstName: String,
+      lastName: String,
+      emailAddress: String,
+      password: String,
+      picture: String
+  },
   data: () => ({
 
     previewImage: "",
-    logInRequest: true ,
-    signUpRequest: false,
-     firstName: "",
-      lastName: "",
-      emailAddress: "",
-      password: ""
+        signUpRequest: false
 
   }),
   methods: {
     createPreview() {
       this.previewImage = URL.createObjectURL(this.$refs.image.files[0]);
     },
-     submit() {
-          const account ={
-                     
-    }
-     this.$emit("create", account);
-      this.firstName=""
-      this.lastName=""
-      this.emailAddress=""
-      this.password=""
-     
 
-  }
-}}
+  },
+};
 </script>
 
 <!-- Custom styles for this template -->
@@ -136,7 +94,7 @@ input[type=password] {
 /* Add a background color when the inputs get focus */
 input[type=text]:focus,
 input[type=password]:focus {
-  background-color: white;
+  background: rgb(255, 255, 255);
   outline: none;
 }
 

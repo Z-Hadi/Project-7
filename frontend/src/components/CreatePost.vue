@@ -1,77 +1,102 @@
 <template>
-<div>
-       <form @submit.prevent="createPost"    class="d-flex flex-column mb-3 col-6 offset-3 col-sm-4 offset-sm-4 mb-5  "> 
-      <label > Author</label>
-      <input type="text" v-model="author" required>
-      <label > Time</label>
-      <input type="text" v-model="time">
-      <label > Title</label>
-      <input type="text" v-model="title">
-      <label>Body</label>
-      <textarea v-model="body"  style="height:100px;"></textarea>
-              
-        <div class="mb-3">
-          <label for="formFile" class="form-label">Default file input example</label>
-          <input class="form-control" type="file" ref="image" @change="createPreview">
-          <img :src="previewImage" class=" w-75 mt-3">
+  <div>
+    <form @submit.prevent="submit" class="d-flex flex-column mb-3 col-6 offset-3 col-sm-4 offset-sm-4 mb-5">
+      <label class="form-label"> Author</label>
+      <input class="form-control bg-white" type="text" v-model="author" required />
+      <label class="form-label"> Title</label>
+      <input class="form-control bg-white" type="text" v-model="title " id="titleId"/>
+
+      <tempalte class=" d-flex justify-content-start my-3 ">
+        <fieldset>
+          <div >
+          <legend class="col-form-label pe-3">
+            What would you like to post?
+          </legend></div>
+          <div class="d-flex flex-row pt-2">
+            <div class="form-check pe-3 ">
+              <input class="form-check-input  " type="radio" name="gridRadios" id="gridRadios1" value="text" v-model="postType" :checked="checked"
+                />
+              <label class="form-check-label d-flex flex-row " for="gridRadios1"> 
+                <font-awesome-icon icon="fa-brands fa-blogger" class="text-primary pt-1 pe-2" /> Text
+              </label>
+            </div>
+            <div class="form-check  ">
+              <input class="form-check-input "  type="radio" name="gridRadios" id="gridRadios2" value="image" v-model="postType" :checked="checked"
+               />
+              <label class="form-check-label d-flex flex-row " for="gridRadios2"  >
+                <font-awesome-icon icon="fa-solid fa-image  " class="text-primary pt-1 pe-2" />  
+                Image
+              </label>
+            </div>
+          </div>
+        </fieldset>
+        
+      </tempalte>
+      <template v-if="postType === 'text'">
+        <label class="form-label">Body</label>
+        <textarea id="bodyId" v-model="body" style="height: 100px"></textarea>
+      </template>
+      <template v-if="postType === 'image'">
+        <div>
+          <input class="form-control bg-white" type="file" ref="image" @change="createPreview" />
+          <img id="imageId" :src="previewImage" class="w-75 mt-3" />
         </div>
-
-        <label  > Seen</label>
-      <input type="text" v-model="Seen" class=" mb-2  ">
+      </template>
+      <label class="form-label"> Seen</label>
+      <input class="form-control bg-white mb-2" type="text" v-model="seen" />
       <div class="d-grid gap-2 col-4 mx-auto">
-        <button class="btn btn-lg btn-primary" type="submit">New Post</button>
-
+        <button class="btn btn-lg btn-primary"  type="submit">New Post</button>
       </div>
     </form>
   </div>
 </template>
 
-<script  >
-const timeEl = document.getElementById('time')
-const postDate = Date.now()
-const date = new Date(postDate)
-timeEl.textContent = date.toLocaleDateString()
-
-const post = {
-	props: {
-		timestamp: String
-	},
-  computed: {
-		formatedTime () {
-			const date = new Date(this.timestamp)
-			return date.toLocaleDateString()
-		}
-	}
-}
-console.log(post)
-
+<script>
 export default {
+  data: () => ({
+    author: "",
+    title: "",
+    body: "",
+    image: "",
+    previewImage: "",
+    seen: "",
+    textPost: false,
+    imagePost: false,
+    checked: false,
+    postType:''
+  }),
+  methods: {
+    createPreview() {
+      this.previewImage = URL.createObjectURL(this.$refs.image.files[0]);
+    },
 
-		data: () => ({
-      author: '',
-      time: '',
-      title: '',
-      body: '',
-      image: '',
-      previewImage:'',
-      seen: ''
-		}),
-		methods: {
- createPreview (){this.previewImage= URL.createObjectURL (this.$refs.image.files[0]) },
+    submit() {
+      this.checked=false
+      this.postType=''
+    const post ={
+        timestamp: Date.now(),
+        title: this.title
 
-			submit() {
-				this.$emit('submit', {
-					timestamp: Date.now(),
-					author: this.author,
-            time: this.time,
-            title: this.title,
-            body: this.body ,
-            image: this.image,
-            seen: this.seen
-				})
-			}
+              
     }
-}
+      if (this.postType === 'text' ){
+  post.body= this.body
+      }
+      else 
+    {
+      post.image=this.image
+    }
 
-  
+      this.$emit("create", post);
+      this.title=''
+      this.body=''
+      this.image=''
+      this.textPost= false
+      this.imagePost= false
+
+      
+
+    },
+  },
+};
 </script>
