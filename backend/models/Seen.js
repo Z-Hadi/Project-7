@@ -1,5 +1,6 @@
-import { Sequelize, Model, DataTypes } from 'sequelize'
-const Model = Sequelize.Model;
+const { Sequelize, Model, DataTypes } = require('sequelize')
+const sequelize = require('../config/database')
+
 
 const class Seen extends Model {}
 
