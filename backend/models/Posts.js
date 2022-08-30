@@ -1,12 +1,14 @@
 const { Sequelize, Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/database')
 
-const class Posts extends Model {}
+class Posts extends Model {}
 
 Posts.init({
     PostID: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        autoIncrement: true,
+        primaryKey: true
+
     },
     Title: {
         type: DataTypes.TEXT,
@@ -26,7 +28,9 @@ Posts.init({
     },
     UserID: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true,
+        foreignKey: true
+
     }
 
 }, {
@@ -34,3 +38,5 @@ Posts.init({
     modelName: 'Posts',
     timestamps: false
 })
+
+module.exports = Posts

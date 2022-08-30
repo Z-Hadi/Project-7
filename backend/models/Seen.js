@@ -2,7 +2,7 @@ const { Sequelize, Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/database')
 
 
-const class Seen extends Model {}
+class Seen extends Model {}
 
 Seen.init({
     PostID: {
@@ -23,3 +23,4 @@ Seen.init({
     modelName: 'Seen',
     timestamps: false
 })
+module.exports = Seen

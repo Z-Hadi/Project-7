@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken")
 require('dotenv').config();
 
 exports.signup = (req, res, next) => {
-    console.log(req.body)
     bcrypt.hash(req.body.Password, 10).then(
         (hash) => {
             const user = new User({
@@ -31,17 +30,18 @@ exports.signup = (req, res, next) => {
 
 
 exports.login = (req, res, next) => {
-    User.findOne({ email: req.body.email }).then(
+    User.findOne({ where: { EmailAddress: req.body.EmailAddress } }).then(
+
         (user) => {
             if (!user) {
                 return res.status(401).json({
                     error: new Error('User not found!')
                 });
             }
-            bcrypt.compare(req.body.password, user.password).then(
+            bcrypt.compare(req.body.Password, user.Password).then(
                 (valid) => {
                     if (!valid) {
-                        return res.status(401).json({
+                        return res.status(402).json({
                             error: new Error('Incorrect password!')
                         });
                     }

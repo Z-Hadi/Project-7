@@ -7,6 +7,7 @@ const app = express();
 const helmet = require("helmet");
 const sequelize = require('./config/database')
 const userRoutes = require('./routes/user');
+const postsRoutes = require('./routes/post');
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -28,9 +29,7 @@ app.use((req, res, next) => {
 
 
 // A catch-all route for anything the webservice does not define.
-app.get('*', (req, res) => res.status(404).send({
-    message: 'Hi, There is nothing to see here',
-}));
+
 (async() => {
     console.log("Testing the database connection........");
     try {
@@ -42,6 +41,11 @@ app.get('*', (req, res) => res.status(404).send({
 })();
 
 
+app.use('/api/posts', postsRoutes);
 app.use('/api/auth', userRoutes);
+
+
+
+
 
 module.exports = app;
