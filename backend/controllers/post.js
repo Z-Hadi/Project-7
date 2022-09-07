@@ -7,13 +7,18 @@ exports.createPost = (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
     const post = new Post({
         Title: postData.Title,
-        Body: postData.Body,
         Seen: 0,
-        // ImageURL: url + "/images/" + req.file.filename,
-
-        UserID: req.auth.userId
+        UserID: postData.UserID
 
     });
+
+    if (req.file) {
+        post.ImageURL = url + "/images/" + req.file.filename
+    }
+
+    if (req.file) {
+        post.Body = postData.Body
+    }
 
     post
         .save()

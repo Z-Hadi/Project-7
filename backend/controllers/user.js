@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/Users')
 const jwt = require("jsonwebtoken")
+const fs = require("fs");
 require('dotenv').config();
 
 exports.signup = (req, res, next) => {
@@ -63,3 +64,63 @@ exports.login = (req, res, next) => {
         res.status(500).json(error);
     });
 }
+
+
+exports.modifyUser = async(req, res, next) => {
+
+    try {
+
+        const user = await User.findOne({ where: { UserID: req.params.id } })
+
+        const userData = req.body;
+        if (req.file) {
+            const url = req.protocol + "://" + req.get("host");
+            userData.ImageURL = url + "/images/" + req.file.filename
+        }
+
+        if (userData.password) {
+            userData.password = await bcrypt.password(userData.password, 10)
+
+        }
+
+        user.set(userData)
+
+        user.save()
+
+        .then(() => {
+                res.status(201).json({
+                    message: "User Account was updated successfully!",
+                });
+            })
+            .catch((error) => {
+                res.status(400).json(error);
+            });
+    } catch (error) {
+        console.log(error)
+    }
+};
+
+
+
+exports.deleteUser = async(req, res, next) => {
+    try {
+
+
+        const user = await User.findOne({ where: { UserID: req.params.id } }).then((user) => {
+            const filename = user.ImageURL.split("/images/")[1];
+            fs.unlink("images/" + filename, () => {
+                User.deleteOne({ _id: req.params.id })
+                    .then(() => {
+                        res.status(200).json({
+                            message: "Deleted!",
+                        });
+                    })
+                    .catch((error) => {
+                        res.status(400).json(error);
+                    });
+            });
+        });
+    } catch (error) {
+        console.log(error)
+    }
+};
