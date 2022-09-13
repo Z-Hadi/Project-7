@@ -102,24 +102,26 @@ exports.modifyUser = async(req, res, next) => {
 
 
 
-exports.deleteUser = async(req, res, next) => {
+exports.deleteUser = (req, res, next) => {
     try {
+        User.findOne({ where: { UserID: req.params.id } }).then((user) => {
 
-
-        const user = await User.findOne({ where: { UserID: req.params.id } }).then((user) => {
             const filename = user.ImageURL.split("/images/")[1];
-            fs.unlink("images/" + filename, () => {
-                User.deleteOne({ _id: req.params.id })
-                    .then(() => {
-                        res.status(200).json({
-                            message: "Deleted!",
-                        });
-                    })
-                    .catch((error) => {
-                        res.status(400).json(error);
+            if (fs.existsSync("images/" + filename)) {
+                fs.unlink("images/" + filename, () => {});
+            }
+
+            user.destroy()
+                .then(() => {
+                    res.status(200).json({
+                        message: "Deleted!",
                     });
-            });
+                })
+                .catch((error) => {
+                    res.status(400).json(error);
+                });
         });
+
     } catch (error) {
         console.log(error)
     }

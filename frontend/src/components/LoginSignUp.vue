@@ -1,110 +1,79 @@
 <template>
-  <template v-if="logInRequest">
-    <div class="row ">
-      <div class="col-6 offset-3 col-sm-8 offset-sm-2 ">
 
-        <main class="form-signin w-100 m-auto  text-center">
-          <form>
-            <img class="mb-5  w-100   " src="icon-left-font-monochrome-black.svg" alt="">
+  <div class="row ">
+    <div class="col-6 offset-3 col-sm-8 offset-sm-2 ">
 
-            <h4 class="h4 mb-4 fw-normal">Please sign in</h4>
-            <div >
+      <main class="form-signin w-100 m-auto  text-center">
+        <form @submit.prevent="submit">
+          <img class="mb-5  w-100   " src="icon-left-font-monochrome-black.svg" alt="">
+
+          <h4 class="h4 mb-4 fw-normal">Please sign in</h4>
+          <div>
             <div class="form-floating">
-              <input type="email" class="form-control"  id="floatingInput" placeholder="name@example.com">
+              <input type="email" class="form-control" v-model="emailAddress" id="floatingInput"
+                placeholder="name@example.com">
               <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-              <input type="password" class="form-control"  id="floatingPassword" placeholder="Password">
+              <input type="password" class="form-control" v-model="password" id="floatingPassword"
+                placeholder="Password">
               <label st for="floatingPassword">Password</label>
             </div>
-            </div>
-            <div class="checkbox mb-3">
-
-            </div>
-            <button class="w-75 btn btn-lg btn-primary mb-3" type="submit" @click="logInRequest = true , signUpRequest = false">Sign in</button>
-
-            <button class="w-75 btn btn-lg btn-success "  @click="signUpRequest = true , logInRequest = false">Create New Account</button>
-          </form>
-
-        </main>
-
-      </div>
-    </div>
-  </template>
-
-
-
-  <tempalte v-if="signUpRequest">
-
-    <form @submit.prevent="submit" class="col-6 offset-3 col-sm-6 offset-sm-3 ">
-      <div class="container bg-white">
-        <h1>Sign Up</h1>
-        <p class="mb-5">Please fill in this form to create an account.</p>
-
-        <label for="email"><b>First Name</b></label>
-        <input type="text" placeholder="Enter First Name" v-model="firstname"  required>
-
-        <label for="email"><b>Last Name</b></label>
-        <input type="text" placeholder="Enter Last Name" v-model="lastname"  required>
-
-        <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" v-model="email" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" v-model="password" required>
-
-
-        <label for="psw-repeat"><b>Please Choose a profile picture</b></label>
-
-        <input class="form-control bg-white" type="file" ref="image" @change="createPreview" />
-        <img id="imageId" :src="previewImage" class="w-75 mt-3" />
-
-        <div class="clearfix">
-          <button type="button" class="cancelbtn">Cancel</button>
-          <button type="submit" class="signupbtn btn-success ">Sign Up</button>
-
-        <div class="d-grid gap-2 col-6 mx-auto">
-          <button class=" btn btn-lg btn-primary mb-3 " type="submit" @click="logInRequest = true , signUpRequest = false">Sign in</button>
           </div>
-        </div>
-      </div>
-    </form>
-  </tempalte>
+          <div class="checkbox mb-3">
 
+          </div>
+          <button class="w-75 btn btn-lg btn-primary mb-3" type="submit">Sign in</button>
 
+          <button class="w-75 btn btn-lg btn-success " @click="signUpRequest = true , logInRequest = false">Create New
+            Account</button>
+        </form>
+
+      </main>
+
+    </div>
+  </div>
 </template>
+
 
 <script>
 export default {
-  
+
   data: () => ({
 
-    previewImage: "",
-    logInRequest: true ,
-    signUpRequest: false,
-     firstName: "",
-      lastName: "",
-      emailAddress: "",
-      password: ""
+
+    emailAddress: "",
+    password: ""
 
   }),
   methods: {
-    createPreview() {
-      this.previewImage = URL.createObjectURL(this.$refs.image.files[0]);
-    },
-     submit() {
-          const account ={
-                     
+
+    submit() {
+
+      fetch("http://localhost:8000/api/auth/login", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          EmailAddress: this.emailAddress,
+          Password: this.password
+        })
+      }).then((response) => {
+       return response.json()
+
+      }).then((token) => {
+        console.log(token)
+
+      })
+        .catch(error => {
+        console.log(error)
+      })
     }
-     this.$emit("create", account);
-      this.firstName=""
-      this.lastName=""
-      this.emailAddress=""
-      this.password=""
-     
+
 
   }
-}}
+}
 </script>
 
 <!-- Custom styles for this template -->
