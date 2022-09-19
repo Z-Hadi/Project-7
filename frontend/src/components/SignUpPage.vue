@@ -1,8 +1,5 @@
 
 <template>
-
-<tempalte v-if="signUpRequest">
-
     <form class="col-6 offset-3 col-sm-6 offset-sm-3 ">
       <div class="container bg-white">
         <h1>Sign Up</h1>
@@ -36,34 +33,61 @@
         </div>
       </div>
     </form>
-  </tempalte>
+
 
 
 </template>
 
+
 <script>
-export default {
-  props: {
-      firstName: String,
-      lastName: String,
-      emailAddress: String,
-      password: String,
-      picture: String
-  },
-  data: () => ({
+  export default {
 
-    previewImage: "",
-        signUpRequest: false
+    
+    data: () => ({
+  
+      previewImage: "",
+      logInRequest: true ,
+      signUpRequest: false,
+       firstName: "",
+        lastName: "",
+        emailAddress: "",
+        password: ""
+  
+    }),
+    methods: {
+      createPreview() {
+        this.previewImage = URL.createObjectURL(this.$refs.image.files[0]);
+      },
+       submit() {
+            const account ={
+                       
+      }
+       this.$emit("create", account);
+        this.firstName=""
+        this.lastName=""
+        this.emailAddress=""
+        this.password=""
+       
+  
+    }
+  }}
+  </script>
+  
 
-  }),
-  methods: {
-    createPreview() {
-      this.previewImage = URL.createObjectURL(this.$refs.image.files[0]);
-    },
 
-  },
-};
-</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Custom styles for this template -->
 <style scoped lang="scss">
