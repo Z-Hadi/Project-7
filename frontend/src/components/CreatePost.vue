@@ -50,9 +50,11 @@
     </form>
   </div>
 </template>
-
 <script>
+  import Cookies from 'js-cookie'
+  const newToken = Cookies.get('token')
 export default {
+  
   data: () => ({
     author: "",
     title: "",
@@ -71,6 +73,30 @@ export default {
     },
 
     submit() {
+      fetch("http://localhost:8000/api/posts/", {
+        method: "POST",
+        credentials: 'include',
+         headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + newToken
+        },
+        body: JSON.stringify({
+          Title: this.title,
+          Body: this.body,
+          Seen: this.seen
+        }),
+        
+      }).then((response) => {
+       return response.json()
+
+
+      })
+        .catch(error => {
+        console.log(error)
+      })
+   
+
+
       this.checked=false
       this.postType=''
     const post ={
@@ -101,28 +127,5 @@ export default {
 };
 
 
-export async function postNewPost(
-  content: string,
-  author: number,
-  image_url: string | null = null
-) {
-  const request = await fetch("http://localhost:3000/posts", {
-    method: "POST",
-    body: JSON.stringify({
-      content: content,
-      user: author,
-      image_url: image_url,
-    }),
-    headers: getHttpHeaders(),
-  });
-
-  const response = await request.json();
-
-  if (!request.ok) {
-    throw new Error(`Error ${request.status} : ${response.error}`);
-  }
-
-  return response;
-}
 
 </script>

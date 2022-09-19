@@ -1,30 +1,37 @@
 /*<template>
   <div class="vh-100 d-flex justify-content-center align-items-center ">
-    
-    <LoginSignUp @create="createAccount" />
-    
-    
+    <template v-if="logInRequest">
+    <LoginPage />
+    </template>
+    <tempalte v-if="signUpRequest">
+    <SignUpPage @create="createAccount" />
+  </tempalte>
+
   </div>
 </template>
 
 <script>
 
 // @ is an alias to /src
-import LoginSignUp from '@/components/LoginSignUp.vue'
+import LoginPage from '@/components/LoginPage.vue';
+import SignUpPage from '@/components/SignUpPage.vue';
 export default {
   name: 'LoginSignUpView',
   components: {
-    LoginSignUp
-    
+    LoginPage,
+    SignUpPage
 },
 
   data: ()=> ({
+
+    logInRequest: true ,
+    signUpRequest: false,
     accounts: [
       {
-      firstName: 'Zaid',
-      lastName: 'Hadi',
-      emailAddress: 'zaid@email.com',
-      password: '****',
+      firstName: '',
+      lastName: '',
+      emailAddress: '',
+      password: '',
       picture: ''
       }
       
