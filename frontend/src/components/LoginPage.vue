@@ -24,7 +24,7 @@
 
           </div>
           <button class="w-75 btn btn-lg btn-primary mb-3" type="submit" @click="logInRequest = true , signUpRequest = false">Sign in</button>
-          <button class="w-75 btn btn-lg btn-success "  type="submit" @click="signUpRequest = true , logInRequest = false">Create New Account</button>
+          <button class="w-75 btn btn-lg btn-success "  @click="createNewAccount">Create New Account</button>
         
         </form>
 
@@ -48,6 +48,13 @@ export default {
 
   }),
   methods: {
+    
+    createNewAccount (){
+      this.$emit("create-new", true);
+
+    },
+
+
 
     submit() {
 

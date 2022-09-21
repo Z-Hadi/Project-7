@@ -5,7 +5,7 @@
   </div>
   <div v-for="(post, index) in posts" :key="index">
 
-    <ThePostPage :author="post.author" :timestamp="post.timestamp" :title="post.title" :body="post.body" :seen="post.seen"/>
+    <ThePostPage  :timestamp="post.timestamp" :title="post.title" :body="post.body" :seen="post.seen"/>
    
 
   </div>
@@ -32,6 +32,32 @@ export default {
 
 
   }),
+//   mounted () {
+
+//     getPosts () {
+//       const newToken = Cookies.get('token')
+//       fetch("http://localhost:8000/api/posts/", {
+//         method: "get",
+//         credentials: 'include',
+//          headers: {
+//           'Content-Type': 'application/json',
+//           'Authorization': 'Bearer ' + newToken
+//         }
+    
+//       }).then((response) => {
+//        return response.json()
+
+
+//       })
+//         .catch(error => {
+//         console.log(error)
+//       })
+   
+// }
+//   }
+
+ 
+
   methods: {
 
     createPost(payload) {

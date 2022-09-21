@@ -11,7 +11,7 @@ exports.signup = (req, res, next) => {
                 FirstName: req.body.FirstName,
                 LastName: req.body.LastName,
                 EmailAddress: req.body.EmailAddress,
-                ImageURL: req.body.ImageURL,
+
                 Password: hash
             });
             user.save().then(
@@ -73,10 +73,7 @@ exports.modifyUser = async(req, res, next) => {
         const user = await User.findOne({ where: { UserID: req.params.id } })
 
         const userData = req.body;
-        if (req.file) {
-            const url = req.protocol + "://" + req.get("host");
-            userData.ImageURL = url + "/images/" + req.file.filename
-        }
+
 
         if (userData.password) {
             userData.password = await bcrypt.password(userData.password, 10)
@@ -106,10 +103,7 @@ exports.deleteUser = (req, res, next) => {
     try {
         User.findOne({ where: { UserID: req.params.id } }).then((user) => {
 
-            const filename = user.ImageURL.split("/images/")[1];
-            if (fs.existsSync("images/" + filename)) {
-                fs.unlink("images/" + filename, () => {});
-            }
+
 
             user.destroy()
                 .then(() => {

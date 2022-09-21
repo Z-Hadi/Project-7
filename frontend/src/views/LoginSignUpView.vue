@@ -1,10 +1,10 @@
 /*<template>
   <div class="vh-100 d-flex justify-content-center align-items-center ">
     <template v-if="logInRequest">
-    <LoginPage />
+    <LoginPage @create-new="logInRequest = false , signUpRequest = true"/>
     </template>
     <tempalte v-if="signUpRequest">
-    <SignUpPage @create="createAccount" />
+    <SignUpPage @sign-in="logInRequest = true , signUpRequest = false" />
   </tempalte>
 
   </div>
@@ -31,20 +31,23 @@ export default {
       firstName: '',
       lastName: '',
       emailAddress: '',
-      password: '',
-      picture: ''
+      password: ''
+  
       }
       
     ]
   }),
 
-  ethods: {
+  methods: {
 
     createAccount(payload) {
 
       this.accounts.unshift(payload)
-
-    }
+     
+    }, 
+    
+    
+    
   }
   
   

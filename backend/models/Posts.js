@@ -12,6 +12,10 @@ Posts.init({
     },
     Title: {
         type: DataTypes.TEXT,
+        validate: {
+            len: [8, 50],
+            notEmpty: true
+        },
         allowNull: false
     },
     Body: {
@@ -28,7 +32,7 @@ Posts.init({
     },
     UserID: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         foreignKey: true
 
     }

@@ -1,34 +1,28 @@
 
 <template>
-    <form class="col-6 offset-3 col-sm-6 offset-sm-3 ">
+    <form @submit.prevent="submit" ref="form" class="col-6 offset-3 col-sm-6 offset-sm-3 ">
       <div class="container bg-white">
         <h1>Sign Up</h1>
         <p class="mb-5">Please fill in this form to create an account.</p>
 
         <label for="email"><b>First Name</b></label>
-        <input type="text" placeholder="Enter First Name" name="firstname" required>
+        <input type="text" placeholder="Enter First Name" name="firstname" minlength="2" maxlength="20"  v-model="firstName" required>
 
         <label for="email"><b>Last Name</b></label>
-        <input type="text" placeholder="Enter Last Name" name="lastname" required>
+        <input type="text" placeholder="Enter Last Name" name="lastname" minlength="2" maxlength="20" v-model="lastName" required>
 
         <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
+        <input type="email" placeholder="Enter Email" name="email" v-model="emailAddress" required>
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
+        <input type="password" placeholder="Enter Password" name="password" v-model="password" minlength="8" maxlength="20" required>
 
-
-        <label for="psw-repeat"><b>Please Choose a profile picture</b></label>
-
-        <input class="form-control bg-white" type="file" ref="image" @change="createPreview" />
-        <img id="imageId" :src="previewImage" class="w-75 mt-3" />
-
-        <div class="clearfix">
+           <div class="clearfix">
           <button type="button" class="cancelbtn">Cancel</button>
-          <button type="submit" class="signupbtn btn-success ">Sign Up</button>
+          <button type="submit" class="signupbtn btn-success" >Sign Up</button>
 
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button class=" btn btn-lg btn-primary mb-3 " type="submit" @click="logInRequest = true , signUpRequest = false">Sign in</button>
+          <button class=" btn btn-lg btn-primary mb-3 "  @click="logInRequest">Sign in</button> 
           </div>
         </div>
       </div>
@@ -45,34 +39,55 @@
     
     data: () => ({
   
-      previewImage: "",
-      logInRequest: true ,
-      signUpRequest: false,
-       firstName: "",
+     
+        firstName: "",
         lastName: "",
         emailAddress: "",
         password: ""
   
     }),
     methods: {
-      createPreview() {
-        this.previewImage = URL.createObjectURL(this.$refs.image.files[0]);
-      },
+      logInRequest (){
+      this.$emit("sign-in", true);},
+     
        submit() {
-            const account ={
-                       
-      }
-       this.$emit("create", account);
+       
+        fetch("http://localhost:8000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          FirstName: this.firstName,
+        LastName: this.lastName,
+        EmailAddress: this.emailAddress,
+        Password: this.password
+
+        })
+      }).then((response) => {
+        
+       return response.json()})
+       .then(data=>{
+
+        console.log(data)
+       }
+       )
+
         this.firstName=""
         this.lastName=""
         this.emailAddress=""
         this.password=""
        
   
-    }
+    },
+    
+    
   }}
   </script>
   
+
+    
+   
 
 
 
@@ -106,6 +121,7 @@
 
 /* Full-width input fields */
 input[type=text],
+input[type="email"],
 input[type=password] {
   width: 100%;
   padding: 15px;
@@ -117,6 +133,7 @@ input[type=password] {
 
 /* Add a background color when the inputs get focus */
 input[type=text]:focus,
+input[type=email]:focus,
 input[type=password]:focus {
   background: rgb(255, 255, 255);
   outline: none;

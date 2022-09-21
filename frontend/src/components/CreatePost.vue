@@ -4,7 +4,7 @@
       <label class="form-label"> Author</label>
       <input class="form-control bg-white" type="text" v-model="author" required />
       <label class="form-label"> Title</label>
-      <input class="form-control bg-white" type="text" v-model="title " id="titleId"/>
+      <input class="form-control bg-white" type="text" minlength="8" maxlength="50" v-model="title " id="titleId"/>
 
       <tempalte class=" d-flex justify-content-start my-3 ">
         <fieldset>
