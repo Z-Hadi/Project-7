@@ -30,11 +30,13 @@
 
 
 
-<!-- <script>
-  import Cookies from 'js-cookie'
-  const newToken = Cookies.get('token')
-export default {
+ <script>
 
+  
+export default {
+Props:{
+  
+}
 
 
   computed: {
@@ -45,25 +47,6 @@ export default {
   },
 
   methods: {
-    
-      fetch("http://localhost:8000/api/posts/", {
-        method: "get",
-        credentials: 'include',
-         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + newToken
-        }
-    
-      }).then((response) => {
-       return response.json()
 
-
-      })
-        .catch(error => {
-        console.log(error)
-      })
-   
-
-  }
 }
-</script> -->
+</script> 
