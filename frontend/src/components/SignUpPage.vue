@@ -65,6 +65,7 @@
 
         })
       }).then((response) => {
+        this.$router.push('/') 
         
        return response.json()})
        .then(data=>{

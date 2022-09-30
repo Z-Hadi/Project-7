@@ -51,6 +51,7 @@ export default {
     
     createNewAccount (){
       this.$emit("create-new", true);
+      
 
     },
 
@@ -68,10 +69,12 @@ export default {
           Password: this.password
         })
       }).then((response) => {
+        this.$router.push('/')
        return response.json()
 
       }).then((token) => {
-        Cookies.set('token', token)
+        Cookies.set('token', token.token)
+        Cookies.set('userId', token.userId)
         console.log(token)
 
       })

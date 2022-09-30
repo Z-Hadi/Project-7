@@ -3,7 +3,7 @@
     <div class="card  ">
      <header class="card-header bg-white border-0" style="height: 35px;"> 
         <div class=" d-flex  justify-content-start">
-          <span class="card-text  text-muted me-1 "><small>Posted By: </small></span>     <!--   How to add the user name here -->
+          <span class="card-text  text-muted me-1 "><small>Posted By:   </small></span>     <!--   How to add the user name here -->
           
           <p class="card-text "><small id="time" class="text-muted">{{ formatedTime }}</small></p>
         </div>
@@ -33,10 +33,15 @@
  <script>
 
   
+// <ThePostPage  :timestamp="post.timestamp" :title="post.title" :body="post.body" :seen="post.seen"/>
+
 export default {
-Props:{
-  
-}
+    props: {
+      timestamp: String,
+      title: String,
+      body: String,
+      seen: String
+  },
 
 
   computed: {
@@ -45,8 +50,7 @@ Props:{
       return date.toLocaleDateString();
     },
   },
-
-  methods: {
-
 }
+
+
 </script> 

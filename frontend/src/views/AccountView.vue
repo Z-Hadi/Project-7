@@ -18,11 +18,10 @@ export default {
   data: ()=> ({
     accounts: [
       {
-      firstName: 'Zaid',
-      lastName: 'Hadi',
-      emailAddress: 'zaid@email.com',
-      password: '****',
-      picture: ''
+      firstName: '',
+      lastName: '',
+      emailAddress: '',
+      password: ''
       }
       
     ]

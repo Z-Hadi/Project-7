@@ -1,10 +1,9 @@
 <template>
   <div>
     <form @submit.prevent="submit" class="d-flex flex-column mb-3 col-6 offset-3 col-sm-4 offset-sm-4 mb-5">
-      <label class="form-label"> Author</label>
-      <input class="form-control bg-white" type="text" v-model="author" required />
+
       <label class="form-label"> Title</label>
-      <input class="form-control bg-white" type="text" minlength="8" maxlength="50" v-model="title " id="titleId"/>
+      <input class="form-control bg-white" type="text" minlength="8" maxlength="50" v-model="title " id="titleId" required/>
 
       <tempalte class=" d-flex justify-content-start my-3 ">
         <fieldset>
@@ -52,11 +51,12 @@
 </template>
 <script>
   import Cookies from 'js-cookie'
-  const newToken = Cookies.get('token')
+  
+  console.log('newToken')
 export default {
   
   data: () => ({
-    author: "",
+    
     title: "",
     body: "",
     image: "",
@@ -73,22 +73,29 @@ export default {
     },
 
     submit() {
+      const newToken = Cookies.get('token')
+      const userId = Cookies.get('userId')
+
+
+
       fetch("http://localhost:8000/api/posts/", {
         method: "POST",
-        credentials: 'include',
-         headers: {
+      
+       
+          headers: new Headers({
+          'Authorization': "Bearer " + newToken,
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + newToken
-        },
+        }),
         body: JSON.stringify({
           Title: this.title,
           Body: this.body,
+          UserID:parseInt(userId),
           Seen: this.seen
         }),
         
       }).then((response) => {
        return response.json()
-
+  
 
       })
         .catch(error => {
@@ -123,7 +130,7 @@ export default {
       
 
     },
-  },
+   },
 };
 
 

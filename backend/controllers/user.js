@@ -46,10 +46,11 @@ exports.login = (req, res, next) => {
                             error: new Error('Incorrect password!')
                         });
                     }
-                    const token = jwt.sign({ userId: user._id },
+                    console.log(user)
+                    const token = jwt.sign({ userId: user.UserID },
                         process.env.RS, { expiresIn: '24h' });
                     res.status(200).json({
-                        userId: user._id,
+                        userId: user.UserID,
                         token: token
                     });
                 }

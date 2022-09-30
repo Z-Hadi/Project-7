@@ -5,7 +5,7 @@
   </div>
   <div v-for="(post, index) in posts" :key="index">
 
-    <ThePostPage  :timestamp="post.timestamp" :title="post.title" :body="post.body" :seen="post.seen"/>
+    <ThePostPage  :timestamp="post.timestamp" :Title="post.title" :body="post.body" :seen="post.seen"/>
    
 
   </div>
@@ -17,8 +17,10 @@
 
 import ThePostPage from '@/components/ThePostPage.vue'
 import CreatePost from '../components/CreatePost.vue'
+import Cookies from 'js-cookie'
 
 export default {
+  
 
   components: {
     ThePostPage,
@@ -32,29 +34,31 @@ export default {
 
 
   }),
-//   mounted () {
+  mounted: () => {
 
-//     getPosts () {
-//       const newToken = Cookies.get('token')
-//       fetch("http://localhost:8000/api/posts/", {
-//         method: "get",
-//         credentials: 'include',
-//          headers: {
-//           'Content-Type': 'application/json',
-//           'Authorization': 'Bearer ' + newToken
-//         }
+  
+      const newToken = Cookies.get('token')
+      fetch("http://localhost:8000/api/posts/", {
+       
+       
+         headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + newToken
+        }
     
-//       }).then((response) => {
-//        return response.json()
+      }).then((response) => {
+        return response.json()})
+       .then(data=>{
 
-
-//       })
-//         .catch(error => {
-//         console.log(error)
-//       })
+        this.posts.unshift(data)
+       }
+       )
+        .catch(error => {
+        console.log(error)
+      })
    
-// }
-//   }
+
+  },
 
  
 

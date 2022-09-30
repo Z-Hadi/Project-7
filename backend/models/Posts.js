@@ -13,7 +13,6 @@ Posts.init({
     Title: {
         type: DataTypes.TEXT,
         validate: {
-            len: [8, 50],
             notEmpty: true
         },
         allowNull: false
