@@ -5,7 +5,7 @@
   </div>
   <div v-for="(post, index) in posts" :key="index">
 
-    <ThePostPage  :timestamp="post.timestamp" :Title="post.title" :body="post.body" :seen="post.seen"/>
+    <ThePostPage  :timestamp="post.timestamp" :Title="post.title" :Body="post.body" />
    
 
   </div>
@@ -48,11 +48,7 @@ export default {
     
       }).then((response) => {
         return response.json()})
-       .then(data=>{
-
-        this.posts.unshift(data)
-       }
-       )
+      
         .catch(error => {
         console.log(error)
       })

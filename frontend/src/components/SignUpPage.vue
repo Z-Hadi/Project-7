@@ -11,7 +11,7 @@
         <label for="email"><b>Last Name</b></label>
         <input type="text" placeholder="Enter Last Name" name="lastname" minlength="2" maxlength="20" v-model="lastName" required>
 
-        <label for="email"><b>Email</b></label>
+        <label for="email"><b>Email Address</b></label>
         <input type="email" placeholder="Enter Email" name="email" v-model="emailAddress" required>
 
         <label for="psw"><b>Password</b></label>

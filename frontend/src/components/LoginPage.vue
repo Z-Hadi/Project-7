@@ -5,7 +5,7 @@
 
       <main class="form-signin w-100 m-auto  text-center">
         <form @submit.prevent="submit">
-          <img class="mb-5  w-100   " src="icon-left-font-monochrome-black.svg" alt="">
+          <img class="mb-5  w-100" src="icon-left-font-monochrome-black.svg" alt="">
 
           <h4 class="h4 mb-4 fw-normal">Please sign in</h4>
           <div>
@@ -69,7 +69,7 @@ export default {
           Password: this.password
         })
       }).then((response) => {
-        this.$router.push('/')
+      
        return response.json()
 
       }).then((token) => {
@@ -81,6 +81,7 @@ export default {
         .catch(error => {
         console.log(error)
       })
+      this.$router.push('/')
     }
 
 

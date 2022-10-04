@@ -9,7 +9,7 @@
         </div>
       </header>
       <div class="card-body">
-        <h3 class="card-title mb-4">{{ title }}</h3>
+        <h3 class="card-title mb-4">{{ Title }}</h3>
 
         <span class="card-text  fs-5 "> {{ body }}</span>
         <div class="mb-3">
@@ -17,7 +17,7 @@
           <ul class="nav justify-content-center shadow-none mt-5  bg-light rounded">
             <li class="nav-item  d-flex justify-content-between align-items-center">
               <a class="nav-link ">
-                <font-awesome-icon icon="fa-solid fa-eye" /> Read
+                <font-awesome-icon icon="fa-solid fa-eye" /> Read    
               </a>
               <span class="badge bg-primary rounded-pill">{{ seen }}</span>
             </li>
