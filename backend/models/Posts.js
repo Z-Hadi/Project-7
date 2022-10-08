@@ -1,45 +1,42 @@
-const { Sequelize, Model, DataTypes } = require('sequelize')
-const sequelize = require('../config/database')
-
+const { Sequelize, Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/database");
+const Users = require("./Users");
 class Posts extends Model {}
 
 Posts.init({
     postId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
-
+        primaryKey: true,
     },
     title: {
         type: DataTypes.TEXT,
         validate: {
-            notEmpty: true
+            notEmpty: true,
         },
-        allowNull: false
+        allowNull: false,
     },
     body: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
     },
     imageUrl: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
     },
     seen: {
         type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    userId: {
-        type: DataTypes.INTEGER,
         allowNull: false,
-        foreignKey: true
-
-    }
-
+    },
 }, {
     sequelize,
-    modelName: 'Posts',
-    timestamps: false
-})
+    modelName: "Posts",
+    timestamps: true,
+});
 
-module.exports = Posts
+// Users.hasMany(Posts);
+Posts.belongsTo(Users, {
+    foreignKey: "userId",
+});
+
+module.exports = Posts;

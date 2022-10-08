@@ -1,23 +1,31 @@
 <template>
-  <div class=" col-6 offset-3 col-sm-4 offset-sm-4 mb-5 ">
-    <div class="card  ">
-     <header class="card-header bg-white border-0" style="height: 35px;"> 
-        <div class=" d-flex  justify-content-start">
-          <span class="card-text  text-muted me-1 "><small>Posted By:   </small></span>     <!--   How to add the user name here -->
-          
-          <p class="card-text "><small id="time" class="text-muted">{{ formatedTime }}</small></p>
+  <div class="col-6 offset-3 col-sm-4 offset-sm-4 mb-5">
+    <div class="card">
+      <header class="card-header bg-white border-0" style="height: 35px">
+        <div class="d-flex justify-content-start">
+          <span class="card-text text-muted me-1"
+            ><small>Posted By: {{ firstName }} </small></span
+          >
+          <!--   How to add the user name here -->
+
+          <p class="card-text">
+            <small id="time" class="text-muted">{{ formatedTime }}</small>
+          </p>
         </div>
       </header>
       <div class="card-body">
         <h3 class="card-title mb-4">{{ title }}</h3>
 
-        <span class="card-text  fs-5 "> {{ body }}</span>
+        <span class="card-text fs-5"> {{ body }}</span>
         <div class="mb-3">
-
-          <ul class="nav justify-content-center shadow-none mt-5  bg-light rounded">
-            <li class="nav-item  d-flex justify-content-between align-items-center">
-              <a class="nav-link ">
-                <font-awesome-icon icon="fa-solid fa-eye" /> Read    
+          <ul
+            class="nav justify-content-center shadow-none mt-5 bg-light rounded"
+          >
+            <li
+              class="nav-item d-flex justify-content-between align-items-center"
+            >
+              <a class="nav-link">
+                <font-awesome-icon icon="fa-solid fa-eye" /> Read
               </a>
               <span class="badge bg-primary rounded-pill">{{ seen }}</span>
             </li>
@@ -28,21 +36,16 @@
   </div>
 </template>
 
-
-
- <script>
-
-  
-// <ThePostPage  :timestamp="post.timestamp" :title="post.title" :body="post.body" :seen="post.seen"/>
+<script>
 
 export default {
-    props: {
-      timestamp: String,
-      title: String,
-      body: String,
-      seen: String
+  props: {
+    timestamp: String,
+    title: String,
+    body: String,
+    seen: String,
+    firstName: String,
   },
-
 
   computed: {
     formatedTime() {
@@ -50,7 +53,5 @@ export default {
       return date.toLocaleDateString();
     },
   },
-}
-
-
-</script> 
+};
+</script>

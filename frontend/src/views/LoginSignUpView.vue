@@ -1,56 +1,46 @@
-/*<template>
-  <div class="vh-100 d-flex justify-content-center align-items-center ">
+<template>
+  <div class="vh-100 d-flex justify-content-center align-items-center">
+    <template v-if="error">
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+    </template>
     <template v-if="logInRequest">
-    <LoginPage @create-new="logInRequest = false , signUpRequest = true"/>
+      <LoginPage
+        @create-new="(logInRequest = false), (signUpRequest = true)"
+        @error="showError"
+      />
     </template>
     <tempalte v-if="signUpRequest">
-    <SignUpPage @sign-in="logInRequest = true , signUpRequest = false" />
-  </tempalte>
-
+      <SignUpPage
+        @sign-in="(logInRequest = true), (signUpRequest = false)"
+        @error="showError"
+      />
+    </tempalte>
   </div>
 </template>
 
 <script>
-
 // @ is an alias to /src
-import LoginPage from '@/components/LoginPage.vue';
-import SignUpPage from '@/components/SignUpPage.vue';
+import LoginPage from "@/components/LoginPage.vue";
+import SignUpPage from "@/components/SignUpPage.vue";
 export default {
-  name: 'LoginSignUpView',
+  name: "LoginSignUpView",
   components: {
     LoginPage,
-    SignUpPage
-},
+    SignUpPage,
+  },
 
-  data: ()=> ({
-
-    logInRequest: true ,
+  data: () => ({
+    error: "",
+    logInRequest: true,
     signUpRequest: false,
-    accounts: [
-      {
-      firstName: '',
-      lastName: '',
-      emailAddress: '',
-      password: ''
-  
-      }
-      
-    ]
   }),
 
   methods: {
-
-    createAccount(payload) {
-
-      this.accounts.unshift(payload)
-     
-    }, 
-    
-    
-    
-  }
-  
-  
-  
-  }
+    showError(message) {
+      this.error = message;
+    },
+  },
+};
 </script>

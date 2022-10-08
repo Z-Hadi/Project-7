@@ -4,20 +4,13 @@ export const newStore = defineStore({
     id: "tryStore",
 
     state: () => ({
-        firstName: '',
-        lastName: '',
-        emailAddress: '',
-        picture: ''
-
+        firstName: "",
+        lastName: "",
+        emailAddress: "",
+        picture: "",
     }),
 
-    actions: () => ({
+    actions: () => ({}),
 
-
-    }),
-
-    getters: () => ({
-
-
-    }),
+    getters: () => ({}),
 });
