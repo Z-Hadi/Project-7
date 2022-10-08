@@ -58,10 +58,10 @@
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          FirstName: this.firstName,
-        LastName: this.lastName,
-        EmailAddress: this.emailAddress,
-        Password: this.password
+          firstName: this.firstName,
+        lastName: this.lastName,
+        emailAddress: this.emailAddress,
+        password: this.password
 
         })
       }).then((response) => {

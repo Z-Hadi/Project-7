@@ -5,14 +5,13 @@ const fs = require("fs");
 require('dotenv').config();
 
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.Password, 10).then(
+    bcrypt.hash(req.body.password, 10).then(
         (hash) => {
             const user = new User({
-                FirstName: req.body.FirstName,
-                LastName: req.body.LastName,
-                EmailAddress: req.body.EmailAddress,
-
-                Password: hash
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                emailAddress: req.body.emailAddress,
+                password: hash
             });
             user.save().then(
                 () => {
@@ -31,7 +30,7 @@ exports.signup = (req, res, next) => {
 
 
 exports.login = (req, res, next) => {
-    User.findOne({ where: { EmailAddress: req.body.EmailAddress } }).then(
+    User.findOne({ where: { emailaddress: req.body.emailaddress } }).then(
 
         (user) => {
             if (!user) {
@@ -39,7 +38,7 @@ exports.login = (req, res, next) => {
                     error: new Error('User not found!')
                 });
             }
-            bcrypt.compare(req.body.Password, user.Password).then(
+            bcrypt.compare(req.body.password, user.password).then(
                 (valid) => {
                     if (!valid) {
                         return res.status(402).json({
@@ -47,10 +46,10 @@ exports.login = (req, res, next) => {
                         });
                     }
                     console.log(user)
-                    const token = jwt.sign({ userId: user.UserID },
+                    const token = jwt.sign({ userId: user.userId },
                         process.env.RS, { expiresIn: '24h' });
                     res.status(200).json({
-                        userId: user.UserID,
+                        userId: user.userId,
                         token: token
                     });
                 }
@@ -71,7 +70,7 @@ exports.modifyUser = async(req, res, next) => {
 
     try {
 
-        const user = await User.findOne({ where: { UserID: req.params.id } })
+        const user = await User.findOne({ where: { userId: req.params.id } })
 
         const userData = req.body;
 
@@ -102,7 +101,7 @@ exports.modifyUser = async(req, res, next) => {
 
 exports.deleteUser = (req, res, next) => {
     try {
-        User.findOne({ where: { UserID: req.params.id } }).then((user) => {
+        User.findOne({ where: { userId: req.params.id } }).then((user) => {
 
 
 

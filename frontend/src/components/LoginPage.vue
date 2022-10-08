@@ -65,8 +65,8 @@ export default {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          EmailAddress: this.emailAddress,
-          Password: this.password
+          emailAddress: this.emailAddress,
+          password: this.password
         })
       }).then((response) => {
       

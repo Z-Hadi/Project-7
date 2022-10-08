@@ -9,7 +9,7 @@
         </div>
       </header>
       <div class="card-body">
-        <h3 class="card-title mb-4">{{ Title }}</h3>
+        <h3 class="card-title mb-4">{{ title }}</h3>
 
         <span class="card-text  fs-5 "> {{ body }}</span>
         <div class="mb-3">

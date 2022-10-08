@@ -5,7 +5,7 @@
   </div>
   <div v-for="(post, index) in posts" :key="index">
 
-    <ThePostPage  :timestamp="post.timestamp" :Title="post.title" :Body="post.body" />
+    <ThePostPage  :timestamp="post.timestamp" :title="post.title" :body="post.body" />
    
 
   </div>

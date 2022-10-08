@@ -4,32 +4,32 @@ const sequelize = require('../config/database')
 class Posts extends Model {}
 
 Posts.init({
-    PostID: {
+    postId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
 
     },
-    Title: {
+    title: {
         type: DataTypes.TEXT,
         validate: {
             notEmpty: true
         },
         allowNull: false
     },
-    Body: {
+    body: {
         type: DataTypes.TEXT,
         allowNull: true
     },
-    ImageURL: {
+    imageUrl: {
         type: DataTypes.TEXT,
         allowNull: true
     },
-    Seen: {
+    seen: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    UserID: {
+    userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         foreignKey: true

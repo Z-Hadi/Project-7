@@ -4,7 +4,7 @@ const sequelize = require('../config/database')
 class Users extends Model {}
 
 Users.init({
-    FirstName: {
+    firstName: {
         type: DataTypes.TEXT,
         validate: {
             notEmpty: true,
@@ -13,7 +13,7 @@ Users.init({
         },
         allowNull: false
     },
-    LastName: {
+    lastName: {
         type: DataTypes.TEXT,
         validate: {
             notEmpty: true,
@@ -23,7 +23,7 @@ Users.init({
         allowNull: false
     },
 
-    EmailAddress: {
+    emailAddress: {
         type: DataTypes.TEXT,
         validate: {
             notEmpty: true,
@@ -31,7 +31,7 @@ Users.init({
         },
         allowNull: false
     },
-    Password: {
+    password: {
         type: DataTypes.TEXT,
         validate: {
             notEmpty: true,
@@ -40,7 +40,7 @@ Users.init({
         allowNull: false
     },
 
-    UserID: {
+    userId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true

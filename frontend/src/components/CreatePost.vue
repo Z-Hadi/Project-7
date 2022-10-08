@@ -88,7 +88,7 @@ export default {
       this.postType = ''
       const post = {
         timestamp: Date.now(),
-        Title: this.title
+        title: this.title
       }
 
       if (this.postType === 'text') {
@@ -109,10 +109,10 @@ export default {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          Title: this.title,
-          Body: this.body,
-          ImageURL: this.image,
-          UserID: parseInt(userId)
+          title: this.title,
+          body: this.body,
+          imageUrl: this.image,
+          userId: parseInt(userId)
           
 
 

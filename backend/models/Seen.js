@@ -5,15 +5,15 @@ const sequelize = require('../config/database')
 class Seen extends Model {}
 
 Seen.init({
-    PostID: {
+    postId: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    SeenID: {
+    seenId: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    UserID: {
+    userId: {
         type: DataTypes.INTEGER,
         allowNull: false
     }
