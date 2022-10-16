@@ -7,7 +7,7 @@ export const newStore = defineStore({
         firstName: "",
         lastName: "",
         emailAddress: "",
-        picture: "",
+        
     }),
 
     actions: () => ({}),

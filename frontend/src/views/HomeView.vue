@@ -4,10 +4,12 @@
 
     <div v-for="(post, index) in posts" :key="index">
       <ThePostPage
-        :timestamp="post.timestamp"
+        :createdAt="post.createdAt"
         :title="post.title"
         :body="post.body"
-        :firstName="post.user.firstName"
+        :imageUrl="post.imageUrl"
+        :firstName="post.User?.firstName"
+        :lastName="post.User?.lastName"
       />
     </div>
   </div>
@@ -30,7 +32,7 @@ export default {
 
     posts: [],
   }),
-  mounted: () => {
+  mounted() {
     const newToken = Cookies.get("token");
     fetch("http://localhost:8000/api/posts/", {
       headers: {
@@ -41,7 +43,9 @@ export default {
       .then((response) => {
         return response.json();
       })
-
+      .then((posts) => {
+        this.posts = posts;
+      })
       .catch((error) => {
         console.log(error);
       });

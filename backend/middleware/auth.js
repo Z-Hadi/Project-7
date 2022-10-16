@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
         const userId = decodedToken.userId;
 
         req.auth = { userId };
-        console.log(req.body.userId, userId)
+        
         if (req.body.userId && parseInt(req.body.userId) !== userId) {
             throw "Invalid user ID";
         } else {

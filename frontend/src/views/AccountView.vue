@@ -5,7 +5,7 @@
         :firstName="account.firstName"
         :lastName="account.lastName"
         :emailAddress="account.emailAddress"
-        :password="account.password"
+        
       >
       </TheAccountPage>
     </div>
@@ -15,6 +15,11 @@
 <script>
 import TheAccountPage from "@/components/TheAccountPage.vue";
 import Cookies from "js-cookie";
+const newFirstName = Cookies.get("userFirstName");
+const newLastName = Cookies.get("userLastName");
+const newEmailAddress = Cookies.get("userEmailAddress");
+
+console.log(Cookies)
 export default {
   name: "AccountView",
   components: {
@@ -23,29 +28,14 @@ export default {
   data: () => ({
     accounts: [
       {
-        firstName: "",
-        lastName: "",
-        emailAddress: "",
-        password: "",
+        firstName: newFirstName,
+        lastName: newLastName,
+        emailAddress: newEmailAddress
+        
       },
     ],
   }),
-  mounted: () => {
-    const userId = Cookies.get("userId");
-    const newToken = Cookies.get("token");
-    console.log(userId);
-    fetch("http://localhost:8000/api/auth/:id", userId, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + newToken,
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
+  
+    
 };
 </script>

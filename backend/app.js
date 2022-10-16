@@ -8,7 +8,7 @@ const helmet = require("helmet");
 const sequelize = require("./config/database");
 const userRoutes = require("./routes/user");
 const postsRoutes = require("./routes/post");
-
+const path = require("path")
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -42,7 +42,7 @@ app.use((req, res, next) => {
         console.error("Failed: Unable to connect to the database:", error);
     }
 })();
-
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use("/api/posts", postsRoutes);
 app.use("/api/auth", userRoutes);
 

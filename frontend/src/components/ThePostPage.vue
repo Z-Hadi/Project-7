@@ -3,20 +3,20 @@
     <div class="card">
       <header class="card-header bg-white border-0" style="height: 35px">
         <div class="d-flex justify-content-start">
-          <span class="card-text text-muted me-1"
-            ><small>Posted By: {{ firstName }} </small></span
+          <span class="card-text text-muted me-2"
+            ><small>Posted By: {{ firstName }} {{ lastName }} </small></span
           >
-          <!--   How to add the user name here -->
 
           <p class="card-text">
-            <small id="time" class="text-muted">{{ formatedTime }}</small>
+            <small id="time" class="text-muted ms-4"> @ {{ formatedTime  }} </small>
           </p>
         </div>
       </header>
       <div class="card-body">
         <h3 class="card-title mb-4">{{ title }}</h3>
 
-        <span class="card-text fs-5"> {{ body }}</span>
+        <div v-if="body" class="card-text fs-5">{{ body }}</div>
+        <img v-if="imageUrl" class="card-img-top" :src="imageUrl" />
         <div class="mb-3">
           <ul
             class="nav justify-content-center shadow-none mt-5 bg-light rounded"
@@ -37,21 +37,24 @@
 </template>
 
 <script>
-
 export default {
   props: {
-    timestamp: String,
+    createdAt: String,
     title: String,
     body: String,
-    seen: String,
+    imageUrl: String,
     firstName: String,
+    lastName: String,
   },
 
   computed: {
     formatedTime() {
-      const date = new Date(this.timestamp);
-      return date.toLocaleDateString();
+      const timestamp = Date.parse(this.createdAt);
+
+      const date = new Date(timestamp);
+      return date.toUTCString();
     },
+    
   },
 };
 </script>

@@ -8,7 +8,7 @@
       <h1>Sign Up</h1>
       <p class="mb-5">Please fill in this form to create an account.</p>
 
-      <label for="email"><b>First Name</b></label>
+      <label for="firstname"><b>First Name</b></label>
       <input
         type="text"
         placeholder="Enter First Name"
@@ -19,7 +19,7 @@
         required
       />
 
-      <label for="email"><b>Last Name</b></label>
+      <label for="lastname"><b>Last Name</b></label>
       <input
         type="text"
         placeholder="Enter Last Name"
@@ -99,9 +99,7 @@ export default {
 
           return response.json();
         })
-        .then((data) => {
-          console.log(data);
-        })
+    
 
         .catch((error) => {
           this.$emit("error", error.message); // test by making faulty loging

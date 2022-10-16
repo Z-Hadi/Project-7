@@ -77,11 +77,17 @@ export default {
           return response.json();
         })
         .then((user) => {
+          
           Cookies.set("token", user.token);
           Cookies.set("userId", user.userId);
-          console.log(user)
+          Cookies.set("userFirstName", user.firstName);
+          Cookies.set("userLastName", user.lastName);
+          Cookies.set("userEmailAddress", user.emailAddress);
+          console.log(user.token)
+
           this.$router.push("/");
         })
+       
         .catch((error) => {
           this.$emit("error", error.message); // test by making faulty login
           console.log(error);

@@ -23,11 +23,7 @@ Posts.init({
     imageUrl: {
         type: DataTypes.TEXT,
         allowNull: true,
-    },
-    seen: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
+    }
 }, {
     sequelize,
     modelName: "Posts",

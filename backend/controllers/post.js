@@ -1,5 +1,6 @@
 const Post = require("../models/Posts");
-const User = require("../models/Posts");
+const Users = require("../models/Users");
+const User = require("../models/Users");
 
 exports.createPost = (req, res, next) => {
 
@@ -7,7 +8,6 @@ exports.createPost = (req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
     const post = new Post({
         title: postData.title,
-        seen: 0,
         userId: parseInt(postData.userId),
     });
 
@@ -28,7 +28,14 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.getAllpost = (req, res, next) => {
-    Post.findAll({ include: User })
+    Post.findAll({ include: User
+    //    {model: User,
+    //     attributes:[ 'firstName','lasName']}
+        
+    
+    
+    
+    })
         .then((posts) => {
             res.status(200).json(posts);
         })
