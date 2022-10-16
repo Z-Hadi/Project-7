@@ -41,15 +41,19 @@ exports.login = (req, res, next) => {
                             error: new Error("Incorrect password!"),
                         });
                     }
-                    console.log(user);
+                   
                     const token = jwt.sign({ userId: user.userId }, process.env.RS, {
                         expiresIn: "24h",
                     });
                     res.status(200).json({
                         userId: user.userId,
                         token: token,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        emailAddress: user.emailAddress,
                     });
                 })
+              
                 .catch((error) => {
                     console.log(error);
                     res.status(500).json(error);
@@ -58,6 +62,7 @@ exports.login = (req, res, next) => {
         .catch((error) => {
             res.status(500).json(error);
         });
+       
 };
 
 exports.modifyUser = async(req, res, next) => {

@@ -94,7 +94,6 @@
 <script>
 import Cookies from "js-cookie";
 
-console.log("newToken");
 export default {
   data: () => ({
     title: "",
@@ -131,7 +130,6 @@ export default {
         method: "POST",
         headers: {
           Authorization: "Bearer " + newToken,
-         
         },
         body: formData,
       })
@@ -140,24 +138,22 @@ export default {
         })
 
         .then((data) => {
-          console.log(data);
           this.$emit("create", data);
+          // reset the post
+
+          this.title = "";
+          this.body = "";
+          this.image = "";
+          this.previewImage = "";
+          this.textPost = false;
+          this.imagePost = false;
+          this.checked = false;
+          this.postType = "";
         })
 
         .catch((error) => {
           console.log(error);
         });
-
-      // reset the post
-
-      this.title = "";
-      this.body = "";
-      this.image = "";
-      this.previewImage = "";
-      this.textPost = false;
-      this.imagePost = false;
-      this.checked = false;
-      this.postType = "";
     },
   },
 };

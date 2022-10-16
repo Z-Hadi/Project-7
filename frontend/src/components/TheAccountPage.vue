@@ -20,10 +20,6 @@
         <li class="list-group-item list-group-item-light my-2">
           {{ emailAddress }}
         </li>
-        <label> Password</label>
-        <li class="list-group-item list-group-item-light my-2">
-          {{ password }}
-        </li>
 
         <div class="d-flex justify-content-center">
           <button
@@ -41,18 +37,27 @@
 </template>
 
 <script>
+import Cookies from "js-cookie";
+
 export default {
   props: {
     firstName: String,
     lastName: String,
     emailAddress: String,
-    password: String,
-    picture: String,
   },
+
   methods: {
-    createNewAccount() {
-      this.$emit("delete-account", true);
-      this.$router.push("/");
+    deleteUserAccount() {
+      const newToken = Cookies.get("token");
+      const userId = Cookies.get("userId");
+      fetch("http://localhost:8000/api/auth/:id", userId, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + newToken,
+        },
+      }).then((response) => {
+        return response.json();
+      });
     },
   },
 };
