@@ -125,7 +125,7 @@ export default {
       } else {
         formData.append("image", this.image);
       }
-
+      console.log(newToken)
       fetch("http://localhost:8000/api/posts/", {
         method: "POST",
         headers: {
