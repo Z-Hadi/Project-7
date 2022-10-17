@@ -10,6 +10,7 @@
         :imageUrl="post.imageUrl"
         :firstName="post.User?.firstName"
         :lastName="post.User?.lastName"
+        :postId="post.postId"
       />
     </div>
   </div>

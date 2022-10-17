@@ -91,12 +91,12 @@ export default {
         }),
       })
         .then((response) => {
-          this.$router.push("/");
+          
           this.firstName = "";
           this.lastName = "";
           this.emailAddress = "";
           this.password = "";
-
+          this.$router.push("/");
           return response.json();
         })
     

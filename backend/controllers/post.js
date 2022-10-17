@@ -28,9 +28,9 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.getAllpost = (req, res, next) => {
-    Post.findAll({ include: User
-    //    {model: User,
-    //     attributes:[ 'firstName','lasName']}
+    Post.findAll({ include: 
+       {model: User,
+        attributes:[ 'firstName','lastName']}
         
     
     

@@ -79,11 +79,14 @@ export default {
         .then((user) => {
           
           Cookies.set("token", user.token);
-          Cookies.set("userId", user.userId);
-          Cookies.set("userFirstName", user.firstName);
-          Cookies.set("userLastName", user.lastName);
-          Cookies.set("userEmailAddress", user.emailAddress);
-          console.log(user.token)
+          localStorage.setItem('user',JSON.stringify({
+          userId: user.userId,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          emailAddress: user.emailAddress
+          }))
+      
+      
 
           this.$router.push("/");
         })

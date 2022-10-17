@@ -1,40 +1,48 @@
 <template>
   <div>
-    <div id="AccountView" v-for="(account, index) in accounts" :key="index">
+   
       <TheAccountPage
-        :firstName="account.firstName"
-        :lastName="account.lastName"
-        :emailAddress="account.emailAddress"
+        :firstName="firstName"
+        :lastName="lastName"
+        :emailAddress="emailAddress"
+        :password="password"
         
       >
       </TheAccountPage>
-    </div>
   </div>
 </template>
 
 <script>
 import TheAccountPage from "@/components/TheAccountPage.vue";
-import Cookies from "js-cookie";
-const newFirstName = Cookies.get("userFirstName");
-const newLastName = Cookies.get("userLastName");
-const newEmailAddress = Cookies.get("userEmailAddress");
 
-console.log(Cookies)
+
+
 export default {
   name: "AccountView",
   components: {
     TheAccountPage,
   },
+  mounted(){
+    const user = JSON.parse(localStorage.getItem('user'))
+    this.firstName= user.firstName
+    this.lastName= user.lastName
+    this.emailAddress= user.emailAddress
+
+
+
+  },
   data: () => ({
-    accounts: [
-      {
-        firstName: newFirstName,
-        lastName: newLastName,
-        emailAddress: newEmailAddress
+   
+        firstName: '',
+        lastName: '',
+        emailAddress: '',
+        password:''
         
-      },
-    ],
+      
+   
   }),
+
+
   
     
 };
