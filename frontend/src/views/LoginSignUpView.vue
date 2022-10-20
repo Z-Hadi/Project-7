@@ -1,8 +1,8 @@
 <template>
   <div class="vh-100 d-flex justify-content-center align-items-center">
     <template v-if="error">
-      <div class="alert alert-danger">
-        {{ error }}
+      <div class="alert alert-danger  " >
+        Please check your credentials and try again
       </div>
     </template>
     <template v-if="logInRequest">
@@ -14,7 +14,7 @@
     <tempalte v-if="signUpRequest">
       <SignUpPage
         @sign-in="(logInRequest = true), (signUpRequest = false)"
-        @error="showError"
+        @error="showError2"
       />
     </tempalte>
   </div>
@@ -40,6 +40,11 @@ export default {
   methods: {
     showError(message) {
       this.error = message;
+ 
+    },
+    showError2() {
+      this.error = "hi";
+ 
     },
   },
 };

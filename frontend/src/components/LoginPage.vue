@@ -52,6 +52,8 @@
 <script>
 import Cookies from "js-cookie";
 
+
+
 export default {
   data: () => ({
     emailAddress: "",
@@ -74,7 +76,9 @@ export default {
         }),
       })
         .then((response) => {
-          return response.json();
+          // console.log(response)
+          if(response.ok ) {return response.json();}
+         throw(response) 
         })
         .then((user) => {
           
@@ -92,8 +96,8 @@ export default {
         })
        
         .catch((error) => {
-          this.$emit("error", error.message); // test by making faulty login
-          console.log(error);
+          this.$emit("error", error.statusText); 
+      
         });
     },
   },

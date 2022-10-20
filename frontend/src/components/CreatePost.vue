@@ -114,9 +114,8 @@ export default {
 
     submit() {
       const newToken = Cookies.get("token");
-      const userId = Cookies.get("userId");
       const formData = new FormData();
-
+      const {userId} = JSON.parse(localStorage.getItem("user"));
       formData.append("userId", parseInt(userId));
       formData.append("title", this.title);
 
@@ -125,7 +124,9 @@ export default {
       } else {
         formData.append("image", this.image);
       }
-      console.log(newToken)
+      // console.log(newToken)
+    
+      
       fetch("http://localhost:8000/api/posts/", {
         method: "POST",
         headers: {
@@ -154,6 +155,8 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+
+        
     },
   },
 };

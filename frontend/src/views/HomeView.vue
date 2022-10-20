@@ -21,6 +21,7 @@
 
 import ThePostPage from "@/components/ThePostPage.vue";
 import CreatePost from "../components/CreatePost.vue";
+import { isJwtExpired} from 'jwt-check-expiration'
 import Cookies from "js-cookie";
 
 export default {
@@ -35,6 +36,13 @@ export default {
   }),
   mounted() {
     const newToken = Cookies.get("token");
+    if (!newToken || isJwtExpired(newToken)){
+      Cookies.remove("token");
+      localStorage.clear("user");
+      this.$router.push("/LoginSignUp")
+    }
+
+    if ( newToken && !isJwtExpired(newToken)){
     fetch("http://localhost:8000/api/posts/", {
       headers: {
         "Content-Type": "application/json",
@@ -50,8 +58,8 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-  },
-
+  }
+},
   methods: {
     createPost(payload) {
       this.posts.unshift(payload);

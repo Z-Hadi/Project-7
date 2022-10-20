@@ -13,15 +13,15 @@ Seen.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    postId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+    // postId: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
         
-    },
-    userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    }
+    // },
+    // userId: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    // }
   
 }, {
     sequelize,
@@ -30,6 +30,13 @@ Seen.init({
 });
 
 
+Seen.belongsTo(Users, {
+    foreignKey: "userId",
+});
+
+Seen.belongsTo(Posts, {
+    foreignKey: "postId",
+});
 
 
 

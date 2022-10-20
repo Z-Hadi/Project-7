@@ -90,6 +90,11 @@ export default {
           password: this.password,
         }),
       })
+      .then((response) => {
+          // console.log(response)
+          if(response.ok ) {return response.json();}
+         throw(response) 
+        })
         .then((response) => {
           
           this.firstName = "";
@@ -102,8 +107,8 @@ export default {
     
 
         .catch((error) => {
-          this.$emit("error", error.message); // test by making faulty loging
-          console.log(error);
+          this.$emit("error", error.statusText); // test by making faulty loging
+          // console.log(error);
         });
     },
   },

@@ -25,14 +25,15 @@
           >
             <li
               class="nav-item d-flex justify-content-between align-items-center"
-              @click="Toggle"
             >
-              <span v-if="hasSeen == true" style="color: blue"
-                ><font-awesome-icon icon="fa-solid fa-eye"
-              /></span>
-              <span v-if="hasSeen == false" style="color: black"
-                ><font-awesome-icon icon="fa-solid fa-eye-slash"
-              /></span>
+              <button @click="toggle" class="btn">
+                <span v-if="hasSeen == true" style="color: blue"
+                  ><font-awesome-icon icon="fa-solid fa-eye"
+                /></span>
+                <span v-if="hasSeen == false" style="color: black"
+                  ><font-awesome-icon icon="fa-solid fa-eye-slash"
+                /></span>
+              </button>
             </li>
           </ul>
         </div>
@@ -42,7 +43,6 @@
 </template>
 
 <script>
-
 import Cookies from "js-cookie";
 export default {
   props: {
@@ -54,43 +54,39 @@ export default {
     lastName: String,
     postId: Number,
   },
-  data(){
-    return{
-    hasSeen: false,
-
-    }
+  data() {
+    return {
+      hasSeen: false,
+    };
   },
   methods: {
-  Toggle() {
-
-    // if (hasSeen === true) {
-    //     hasSeen=false
-    //   } else {
-    //     hasSeen=true
-    //   }
-
-
+    toggle() {
       const newToken = Cookies.get("token");
       const user = JSON.parse(localStorage.getItem("user"));
+      
       fetch("http://localhost:8000/api/seen", {
         method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + newToken,
-      },
-      body: JSON.stringify({
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + newToken,
+        },
+        body: JSON.stringify({
           userId: user.userId,
           postId: this.postId,
-      })})
-      .then(response=>{
-      return response.json()
-          })
-          .then(()=>{
-          this.hasSeen= true })
-              .catch((error) => {
-          console.log(error);
+        }),
+      })
+        .then((response) => {
+          if (response.ok )
+          {
+            this.hasSeen = true;
+          }
         })
-    }},
+      
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
 
   mounted() {
     const newToken = Cookies.get("token");
@@ -100,15 +96,13 @@ export default {
         "Content-Type": "application/json",
         Authorization: "Bearer " + newToken,
       },
-
     })
-    .then(response=>{
-return response.json()
-    })
-    .then(hasSeen=>{
-      this.hasSeen= hasSeen
-
-    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((hasSeen) => {
+        this.hasSeen = hasSeen;
+      });
   },
   computed: {
     formatedTime() {
@@ -118,5 +112,5 @@ return response.json()
       return date.toUTCString();
     },
   },
-}
+};
 </script>

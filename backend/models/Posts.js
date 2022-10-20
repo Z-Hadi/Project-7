@@ -35,4 +35,5 @@ Posts.belongsTo(Users, {
     foreignKey: "userId",
 });
 
+
 module.exports = Posts;

@@ -7,7 +7,7 @@ exports.createSeen = (req, res, next) => {
       if (doc.length) {
         res.status(200).send()
       }
-      console.log(data)
+      // console.log(data)
       Seen.create({ userId: data.userId, postId: data.postId }).then(() => {
         res.status(200).send()
       })  .catch((error) => {
