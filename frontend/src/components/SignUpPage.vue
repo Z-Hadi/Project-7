@@ -90,21 +90,21 @@ export default {
           password: this.password,
         }),
       })
-      .then((response) => {
+        .then((response) => {
           // console.log(response)
-          if(response.ok ) {return response.json();}
-         throw(response) 
+          if (response.ok) {
+            return response.json();
+          }
+          throw response;
         })
         .then((response) => {
-          
           this.firstName = "";
           this.lastName = "";
           this.emailAddress = "";
           this.password = "";
-          this.$router.push("/");
+          this.$router.push("/")
           return response.json();
         })
-    
 
         .catch((error) => {
           this.$emit("error", error.statusText); // test by making faulty loging

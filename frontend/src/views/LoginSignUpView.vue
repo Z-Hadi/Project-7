@@ -2,7 +2,7 @@
   <div class="vh-100 d-flex justify-content-center align-items-center">
     <template v-if="error">
       <div class="alert alert-danger  " >
-        Please check your credentials and try again
+        Unauthorized !! Please check your credentials and try again
       </div>
     </template>
     <template v-if="logInRequest">
@@ -42,10 +42,7 @@ export default {
       this.error = message;
  
     },
-    showError2() {
-      this.error = "hi";
- 
-    },
+    
   },
 };
 </script>

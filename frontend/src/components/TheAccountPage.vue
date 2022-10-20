@@ -63,7 +63,8 @@ export default {
           throw response;
         })
         .then(() => {
-          this.$router.push("/");
+          setTimeout(() => { alert("User's account was deleted successfully"); }, 1);
+          this.$router.push("/LoginSignUp");
         })
         .catch((error) => {
           this.$emit("error", error.statusText);

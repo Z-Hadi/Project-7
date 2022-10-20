@@ -6013,12 +6013,7 @@ textarea.form-control-lg {
   }
 }
 .spinner-grow {
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-  vertical-align: -0.125em;
-  background-color: currentColor;
-  border-radius: 50%;
+
   opacity: 0;
   -webkit-animation: 0.75s linear infinite spinner-grow;
           animation: 0.75s linear infinite spinner-grow;

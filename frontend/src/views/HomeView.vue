@@ -62,7 +62,7 @@ export default {
 },
   methods: {
     createPost(payload) {
-      this.posts.unshift(payload);
+      this.posts.push(payload);
     },
   },
 };
